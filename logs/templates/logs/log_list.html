@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodLog</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <label>気分:</label>
+        <select name="mood">
+            <option value="happy">😊</option>
+            <option value="normal">😐</option>
+            <option value="sad">😢</option>
+        </select>
+
+        <br>
+
+        <label>行動:</label>
+        <textarea name="action"></textarea>
+
+        <br>
+
+        <button type="submit">追加</button>
+    </form>
+
+    <hr>
+
+    {% for log in logs %}
+    <p>{{ log.get_mood_display }} - {{ log.action }} - {{ log.created_at }}</p>
+    {% endfor %}
+</body>
+</html>
